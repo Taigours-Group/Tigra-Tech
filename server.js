@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 
 // --- Allowed columns mapping ---
 const tableColumns = {
-  projects: ['id','title','description','techStack','imageUrl','featured','liveUrl','repoUrl'],
+  projects: ['id','title','description','techStack','imageUrl','featured', 'clientType','liveUrl','repoUrl'],
   blogs: ['id','title','excerpt','content','date','author','imageUrl'],
   services: ['id','title','description','icon','category']
 };
