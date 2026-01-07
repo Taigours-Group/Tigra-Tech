@@ -1,5 +1,7 @@
-import 'dotenv/config';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import express from 'express';
+import 'dotenv/config';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { createClient } from '@supabase/supabase-js';
@@ -9,6 +11,9 @@ const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_KEY
 );
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // --- Express Setup ---
 const app = express();
@@ -111,6 +116,16 @@ app.post('/api/login', (req, res) => {
   }
   res.status(401).json({ success: false, message: 'Invalid credentials' });
 });
+
+
+// Serve static files from the Vite build directory
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// Handle SPA routing: send all non-API requests to index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 
 // --- Start server ---
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
