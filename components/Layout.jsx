@@ -45,13 +45,6 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Link 
-              id="admin-btn"
-              to="/admin" 
-              className="text-sm bg-white/5 border border-white/10 px-4 py-2 rounded-full hover:bg-white/10 transition-colors text-white"
-            >
-              Admin
-            </Link>
           </div>
 
           <div className="md:hidden">
